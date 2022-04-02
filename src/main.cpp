@@ -72,7 +72,7 @@ int main() {
     glfwSetScrollCallback(window, scroll_callback);
     glfwSetKeyCallback(window, key_callback);
     // tell GLFW to capture our mouse
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
     // glad: load all OpenGL function pointers
     // ---------------------------------------
@@ -718,6 +718,7 @@ int main() {
 
         // plant model
 
+        // TODO: Popraviti svetlo. Treba da podrzava spotlit, pointlight itd.
         plantNormalShader.use();
         plantNormalShader.setVec3("viewPos", camera.Position);
         plantNormalShader.setVec3("lightPos", lightPos);
