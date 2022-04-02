@@ -725,6 +725,14 @@ int main() {
 
         plantNormalShader.setFloat("material.shininess", 32.0f);
 
+        plantNormalShader.setVec3("light.position", lightPos);
+        plantNormalShader.setVec3("light.ambient", glm::vec3(0.1));
+        plantNormalShader.setVec3("light.diffuse", 1.0f, 1.0f, 1.0f);
+        plantNormalShader.setVec3("light.specular", 0.0f, 0.0f, 0.0f);
+        plantNormalShader.setFloat("light.constant", 1.0f);
+        plantNormalShader.setFloat("light.linear", 0.007f);
+        plantNormalShader.setFloat("light.quadratic", 0.0002f);
+
         plantNormalShader.setMat4("projection", projection);
         plantNormalShader.setMat4("view", view);
         model = glm::mat4(1.0f);
