@@ -720,18 +720,37 @@ int main() {
 
         // TODO: Popraviti svetlo. Treba da podrzava spotlit, pointlight itd.
         plantNormalShader.use();
-        plantNormalShader.setVec3("viewPos", camera.Position);
+        plantNormalShader.setVec3("viewPos", lightPos);
+        plantNormalShader.setFloat("material.shininess", 18.0f);
+        plantNormalShader.setInt("flashLight", flashLight);
+
         plantNormalShader.setVec3("lightPos", lightPos);
 
         plantNormalShader.setFloat("material.shininess", 32.0f);
 
-        plantNormalShader.setVec3("light.position", lightPos);
-        plantNormalShader.setVec3("light.ambient", glm::vec3(0.1));
-        plantNormalShader.setVec3("light.diffuse", 1.0f, 1.0f, 1.0f);
-        plantNormalShader.setVec3("light.specular", 0.0f, 0.0f, 0.0f);
-        plantNormalShader.setFloat("light.constant", 1.0f);
-        plantNormalShader.setFloat("light.linear", 0.007f);
-        plantNormalShader.setFloat("light.quadratic", 0.0002f);
+        plantNormalShader.setVec3("dirLight.direction", glm::vec3(dirPos));
+        plantNormalShader.setVec3("dirLight.ambient", 0.1f, 0.1f, 0.1f);
+        plantNormalShader.setVec3("dirLight.diffuse", 0.2f, 0.2f, 0.2f);
+        plantNormalShader.setVec3("dirLight.specular", 0.0f, 0.0f, 0.0f);
+
+        plantNormalShader.setVec3("pointLight.position", lightPos);
+        plantNormalShader.setVec3("pointLight.ambient", 0.05f, 0.05f, 0.05f);
+        plantNormalShader.setVec3("pointLight.diffuse", 1.0f, 1.0f, 1.0f);
+        plantNormalShader.setVec3("pointLight.specular", 0.0f, 0.0f, 0.0f);
+        plantNormalShader.setFloat("pointLight.constant", 1.0f);
+        plantNormalShader.setFloat("pointLight.linear", 0.007f);
+        plantNormalShader.setFloat("pointLight.quadratic", 0.0002f);
+
+        plantNormalShader.setVec3("spotLight.position", camera.Position);
+        plantNormalShader.setVec3("spotLight.direction", camera.Front);
+        plantNormalShader.setVec3("spotLight.ambient", 0.0f, 0.0f, 0.0f);
+        plantNormalShader.setVec3("spotLight.diffuse", 1.0f, 1.0f, 1.0f);
+        plantNormalShader.setVec3("spotLight.specular", 1.2f, 1.2f, 1.2f);
+        plantNormalShader.setFloat("spotLight.constant", 1.0f);
+        plantNormalShader.setFloat("spotLight.linear", 0.007f);
+        plantNormalShader.setFloat("spotLight.quadratic", 0.0002f);
+        plantNormalShader.setFloat("spotLight.cutOff", glm::cos(glm::radians(12.5f)));
+        plantNormalShader.setFloat("spotLight.outerCutOff", glm::cos(glm::radians(15.0f)));
 
         plantNormalShader.setMat4("projection", projection);
         plantNormalShader.setMat4("view", view);
