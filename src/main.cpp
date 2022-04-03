@@ -72,7 +72,7 @@ int main() {
     glfwSetScrollCallback(window, scroll_callback);
     glfwSetKeyCallback(window, key_callback);
     // tell GLFW to capture our mouse
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     // glad: load all OpenGL function pointers
     // ---------------------------------------
@@ -718,23 +718,24 @@ int main() {
 
         // plant model
 
-        // TODO: Popraviti svetlo. Treba da podrzava spotlit, pointlight itd.
+        // TODO: Popraviti svetlo!
         plantNormalShader.use();
         plantNormalShader.setVec3("viewPos", lightPos);
         plantNormalShader.setFloat("material.shininess", 18.0f);
         plantNormalShader.setInt("flashLight", flashLight);
 
         plantNormalShader.setVec3("lightPos", lightPos);
+        plantNormalShader.setVec3("lightDir", camera.Front);
 
         plantNormalShader.setFloat("material.shininess", 32.0f);
 
-        plantNormalShader.setVec3("dirLight.direction", glm::vec3(dirPos));
+        plantNormalShader.setVec3("dirLight.direction", dirPos);
         plantNormalShader.setVec3("dirLight.ambient", 0.1f, 0.1f, 0.1f);
         plantNormalShader.setVec3("dirLight.diffuse", 0.2f, 0.2f, 0.2f);
         plantNormalShader.setVec3("dirLight.specular", 0.0f, 0.0f, 0.0f);
 
         plantNormalShader.setVec3("pointLight.position", lightPos);
-        plantNormalShader.setVec3("pointLight.ambient", 0.05f, 0.05f, 0.05f);
+        plantNormalShader.setVec3("pointLight.ambient", glm::vec3(0.1f));
         plantNormalShader.setVec3("pointLight.diffuse", 1.0f, 1.0f, 1.0f);
         plantNormalShader.setVec3("pointLight.specular", 0.0f, 0.0f, 0.0f);
         plantNormalShader.setFloat("pointLight.constant", 1.0f);
